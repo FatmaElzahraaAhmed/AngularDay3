@@ -1,0 +1,36 @@
+<div>
+    <h1>Register</h1>
+    <input
+      type="text"
+      name="studentName"
+      [(ngModel)]="studentName"
+      #studentNameInput="ngModel"
+      required
+      minlength="3"
+      placeholder="Enter studentName"
+    />
+    <div *ngIf="studentNameInput.invalid && (studentNameInput.dirty || studentNameInput.touched)">
+      <span *ngIf="studentNameInput.errors?.['required']" class="not-valid">Student Name is required</span>
+      <span *ngIf="studentNameInput.errors?.['minlength']" class="not-valid">Student Name must be at least 3 letters</span>
+      <span *ngIf="studentNameInput.valid" class="valid">Valid Student Name</span>
+    </div>
+  
+    <input
+      type="number"
+      name="age"
+      [(ngModel)]="studentAge"
+      #ageInput="ngModel"
+      required
+      min="10"
+      [max]="30"
+      placeholder="Enter Your Age"
+    />
+    <div *ngIf="ageInput.invalid && (ageInput.dirty || ageInput.touched)">
+      <span *ngIf="ageInput?.errors?.['required']" class="not-valid">Age is required</span>
+      <span *ngIf="ageInput?.errors?.['min'] || ageInput?.errors?.['max']" class="not-valid">Age must be between 10 and 30 years</span>
+      <span *ngIf="ageInput?.valid" class="valid">Valid Age</span>
+    </div>
+  
+    <input type="button" value="Register" (click)="saveData()" [disabled]="!studentNameInput.valid || !ageInput.valid" />
+  </div>
+  
